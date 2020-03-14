@@ -1,0 +1,16 @@
+@import "../styles/spacing.scss";
+@import "../styles/fonts.scss";
+@import "../styles/table.scss";
+
+.investors-container {
+    padding: $sp_lg;
+}
+
+.title {
+    @include page-header;
+    padding-bottom: $sp_md;
+}
+
+.investors-table {
+    @include table;
+}

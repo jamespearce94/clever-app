@@ -1,0 +1,29 @@
+@import '../../styles/spacing.scss';
+@import '../../styles/colours.scss';
+@import '../../styles/postioning.scss';
+
+$nav-height: 70px;
+
+
+.nav-container {
+    background: $dark-grey;
+    height: $nav-height;
+    padding: 0 $sp_xl;
+    width: 100%;
+    position: relative;
+}
+
+.nav-links {
+    height: 100%;
+    @include flex-row(center);
+}
+
+.nav-link {
+    color: $white;
+    padding: $sp_xs $sp_md;
+    border-left: 1px solid $white;
+    border-right: 1px solid $white;
+    &.active {
+        text-decoration: underline;
+    }
+}

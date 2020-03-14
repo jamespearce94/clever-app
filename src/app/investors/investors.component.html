@@ -1,0 +1,17 @@
+<div class="investors-container">
+    <div class="title">Investors</div>
+
+    <input name="investor-search" placeholder="Search Investors" [(ngModel)]="searchTerm" (ngModelChange)="onSearch($event)">
+
+    <table class="investors-table" *ngIf="filteredInvestors?.length > 0">
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Date</th>
+        <tr *ngFor="let row of filteredInvestors">
+            <td>{{row?.name}}</td>
+            <td>{{row?.surname}}</td>
+            <td>{{row?.dateCreated | dateFormat:'dd/MM/yyyy'}}</td>
+        </tr>
+    </table>
+</div>
+

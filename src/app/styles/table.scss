@@ -1,0 +1,32 @@
+@import "./fonts.scss";
+@import "./spacing.scss";
+
+$table-even-color:rgba($dark-grey, .1);
+
+@mixin table($full-width: true) {
+    @if $full-width {
+        width: 100%;
+    }
+
+    border-collapse: collapse;
+
+    th {
+        @include table-header;
+        padding: $sp_xs;
+    }
+    tr {
+        &:nth-child(odd) {
+            background: $table-even-color;
+        }
+        &:hover {
+            background: $light-grey;
+        }
+    }
+    td {
+        @include table-row;
+        padding: $sp_sm $sp_xs;
+        &:not(:last-child) {
+            border-right: solid 1px $light-grey;
+        }
+    }
+}
