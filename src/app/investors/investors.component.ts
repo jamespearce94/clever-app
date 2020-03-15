@@ -49,7 +49,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
     }
 
     public onSearch(searchTerm: string) {
-        if (this.router.hasOwnProperty('navigate')) {
+        if (this.router.hasOwnProperty('navigate')) { // Failed testing without. 
             this.router.navigate(
                 [], 
                 {
