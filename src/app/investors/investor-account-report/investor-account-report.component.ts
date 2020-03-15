@@ -47,7 +47,7 @@ export class InvestorAccountReportComponent implements OnInit, OnDestroy {
             flatMap((investor) => {
                 if (isObject(investor)) {
                     this.investor = investor;
-                    return this.accountsService.getAccountByInvestorId(this.investor.investorId);
+                    return this.accountsService.getAccountsByInvestorId(this.investor.investorId);
                 }
                 throwError("Unable to retrieve investor.");
             })
@@ -73,13 +73,14 @@ export class InvestorAccountReportComponent implements OnInit, OnDestroy {
                     const accounts = grouped[accountType];
                     pieChartData.push({
                         name: accountType,
-                        value: reduce(accounts, (sum, n) => {
-                            return sum + n.amountHeld;
+                        value: reduce(accounts, (sum: number, account: IAccount) => {
+                            return sum + account.amountHeld;
                         }, 0)
                     })
                 }
             }
         }
+        
         this.pieChartData = pieChartData;
     }
 }

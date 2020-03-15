@@ -23,7 +23,7 @@ export class InvestorsBackendService {
         )
     }
 
-    public getInvestorById(id: number) {
+    public getInvestorById(id: number): Observable<IInvestor> {
         return this.api.get(`${this.baseUrl}/investors/${id}`).pipe(
             map((investor: any) => {
                 investor.dateCreated = isString(investor?.dateCreated) ? new Date(investor.dateCreated) : investor.dateCreated;

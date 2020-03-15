@@ -1,5 +1,3 @@
-
-
 export interface IInvestor {
     investorId: number;
     name: string;
