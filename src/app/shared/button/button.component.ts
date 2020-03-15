@@ -13,9 +13,19 @@ export class ButtonComponent implements OnInit {
 
     @Input() public type: string;
 
-    @Input() public style: ButtonType = 'primary';
+    @Input() public icon: string[];
 
-    @Input() public set disabled(disabled) {
+    @Input() public set iconOnly(iconOnly: any) {
+        this.iconOnlyState = coerceBooleanProperty(iconOnly);
+    }
+
+    public get iconOnly() {
+        return this.iconOnlyState;
+    }
+
+    @Input() public styleType: ButtonType = 'primary';
+
+    @Input() public set disabled(disabled: any) {
         this.disabledState = coerceBooleanProperty(disabled);
     }
 
@@ -24,6 +34,7 @@ export class ButtonComponent implements OnInit {
     }
 
     private disabledState: boolean = false;
+    private iconOnlyState: boolean = false;
 
     @Output() public onClick: EventEmitter<void> = new EventEmitter();
 

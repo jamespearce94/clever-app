@@ -26,3 +26,8 @@ export interface IOption<T> {
     value: T;
     viewValue: string;
 }
+
+export interface IPieChartPoint {
+    name: string;
+    value: number;
+}

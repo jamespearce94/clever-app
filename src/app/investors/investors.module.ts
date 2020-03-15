@@ -4,8 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvestorsComponent } from './investors.component';
 import { InvestorsRoutingModule } from './investors.routing.module';
 import { DateFormatPipeModule } from '../shared/pipes/date-format-pipe/date-format.pipe.module';
-import { InvestorDetailsComponent } from './details/investor-details.component';
+import { InvestorDetailsComponent } from './investor-details/investor-details.component';
 import { ButtonModule } from '../shared/button/button.module';
+import { InvestorAccountReportComponent } from './investor-account-report/investor-account-report.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
  
 
 @NgModule({
@@ -15,15 +18,19 @@ import { ButtonModule } from '../shared/button/button.module';
         ReactiveFormsModule,
         ButtonModule,
         InvestorsRoutingModule,
-        DateFormatPipeModule
+        DateFormatPipeModule,
+        NgxChartsModule,
+        FontAwesomeModule
     ],
     exports: [
         InvestorsComponent,
-        InvestorDetailsComponent
+        InvestorDetailsComponent,
+        InvestorAccountReportComponent
     ],
     declarations: [
         InvestorsComponent,
-        InvestorDetailsComponent
+        InvestorDetailsComponent,
+        InvestorAccountReportComponent
     ],
     providers: [],
 })

@@ -19,7 +19,14 @@
         }
         
         &.secondary {
-        
+
+            background: transparent;
+            color: $blue;
+            border-radius: 2px;
+            border: 1px solid $blue;
+            &:hover {
+                background: transparent;
+            }
         }
 
         &.disabled {
@@ -30,6 +37,9 @@
                 background: $light-grey;
                 color: $dark-grey;
             }
+        }
+        .label-padding {
+            padding-left: $sp_sm;
         }
     }
 }

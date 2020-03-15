@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { InvestorsBackendService } from '../core/investors-backend.service';
-import { IInvestor, ITableProperty } from '../core/core.interfaces';
+import { IInvestor } from '../core/core.interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, take, flatMap } from "rxjs/operators";
-import { relative } from 'path';
 
 @Component({
     selector: 'app-investors',
@@ -61,11 +60,20 @@ export class InvestorsComponent implements OnInit, OnDestroy {
         this.filteredInvestors = this.filterBy(this.investors, this.searchOption, searchTerm);
     }
 
-    public onInvestorSelected(investor: IInvestor) {
+    public onInvestorSelected(investor: IInvestor, event: MouseEvent) {
+        event.stopPropagation();
         if (!investor || !investor.hasOwnProperty('investorId')) {
             throw new Error("Invalid investor selection.");
         }
         this.router.navigate(['./detail'], {relativeTo: this.activatedRoute, queryParams: {id: investor?.investorId}});
+    }
+
+    public onInvestorReportSelected(investor: IInvestor, event: MouseEvent) {
+        event.stopPropagation();
+        if (!investor || !investor.hasOwnProperty('investorId')) {
+            throw new Error("Invalid investor selection.");
+        }
+        this.router.navigate(['./report'], {relativeTo: this.activatedRoute, queryParams: {id: investor?.investorId}});
     }
 
     private getInvestors(): Observable<any[]> {

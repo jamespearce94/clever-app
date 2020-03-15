@@ -1,1 +1,6 @@
-<button [ngClass]="{'disabled' : disabled}" class="{{style}}" [type]="type" (click)="onButtonClick($event)"><ng-content></ng-content></button>
+<button [ngClass]="{'disabled' : disabled}" class="{{styleType}}" [type]="type" (click)="onButtonClick($event)">
+    <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+    <span *ngIf="!iconOnly" [ngClass]="{'label-padding': icon?.length}">
+        <ng-content></ng-content>
+    </span>
+</button>
