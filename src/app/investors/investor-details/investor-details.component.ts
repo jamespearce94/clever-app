@@ -56,7 +56,7 @@ export class InvestorDetailsComponent implements OnInit, OnDestroy {
             flatMap((investor) => {
                 if (isObject(investor)) {
                     this.investor = investor;
-                    return this.accountsService.getAccountByInvestorId(this.investor.investorId);
+                    return this.accountsService.getAccountsByInvestorId(this.investor.investorId);
                 }
                 throwError("Unable to retrieve investor.");
             })
