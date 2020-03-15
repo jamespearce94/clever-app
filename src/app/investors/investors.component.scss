@@ -13,4 +13,7 @@
 
 .investors-table {
     @include table;
+    tr {
+        cursor: pointer;
+    }
 }

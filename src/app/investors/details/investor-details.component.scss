@@ -1,0 +1,45 @@
+@import "../../styles/spacing.scss";
+@import "../../styles/fonts.scss";
+@import "../../styles/table.scss";
+@import "../../styles/postioning.scss";
+@import "../../styles/colours.scss";
+
+.accounts-container {
+    padding: $sp_lg;
+}
+
+.title {
+    @include page-header;
+    padding-bottom: $sp_md;
+}
+
+.accounts-table {
+    @include table;
+    margin-bottom: $sp_lg;
+    tr {
+        cursor: pointer;
+    }
+}
+
+.input-row {
+    @include flex-row(flex-start, flex-start, wrap);
+}
+
+.input-container {
+    margin-bottom: $sp_sm;
+    &:not(:first-child) {
+        padding-left: $sp_md;
+    }
+    .label {
+        @include table-header;
+    }
+    .error {
+        @include labels-additional-info(10px);
+        color: $error;
+        padding-top: $sp-xs;
+        min-height: 13px; // Stop button moving when error appears.
+    }
+}
+
+sh-button {
+}

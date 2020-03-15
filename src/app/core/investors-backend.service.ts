@@ -13,12 +13,21 @@ export class InvestorsBackendService {
     constructor(private readonly api: ApiRequestService) { }
 
     public getAllInvestors(): Observable<IInvestor[]> {
-        return this.api.get(`${this.baseUrl}/investors/getby`).pipe(
+        return this.api.get(`${this.baseUrl}/investors`).pipe(
             map((investors: any[]) => {
                 return investors.map((investor) => {
                     investor.dateCreated = isString(investor?.dateCreated) ? new Date(investor.dateCreated) : investor.dateCreated;
                     return investor;
                 });
+            })
+        )
+    }
+
+    public getInvestorById(id: number) {
+        return this.api.get(`${this.baseUrl}/investors/${id}`).pipe(
+            map((investor: any) => {
+                investor.dateCreated = isString(investor?.dateCreated) ? new Date(investor.dateCreated) : investor.dateCreated;
+                return investor;
             })
         )
     }

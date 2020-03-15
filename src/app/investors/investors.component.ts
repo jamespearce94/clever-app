@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { InvestorsBackendService } from '../core/investors-backend.service';
 import { IInvestor, ITableProperty } from '../core/core.interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, take, flatMap } from "rxjs/operators";
+import { relative } from 'path';
 
 @Component({
     selector: 'app-investors',
@@ -11,7 +12,7 @@ import { map, take, flatMap } from "rxjs/operators";
     styleUrls: ['./investors.component.scss']
 })
 
-export class InvestorsComponent implements OnInit {
+export class InvestorsComponent implements OnInit, OnDestroy {
 
     public investors: IInvestor[] = [];
     public filteredInvestors: IInvestor[] = [];
@@ -27,7 +28,7 @@ export class InvestorsComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
-        this.activatedRoute.queryParams.pipe(
+        this.investorsSubscription.add(this.activatedRoute.queryParams.pipe(
             map((params) => {
                 if (params && params.hasOwnProperty("searchTerm")) {
                     this.searchTerm = params["searchTerm"];
@@ -40,10 +41,15 @@ export class InvestorsComponent implements OnInit {
         ).subscribe((investors: IInvestor[]) => {
             this.investors = investors;
             this.filteredInvestors = this.filterBy(this.investors, this.searchOption, this.searchTerm);
-        });
+        }));
+    }
+
+    public ngOnDestroy() {
+        this.investorsSubscription.unsubscribe();
     }
 
     public onSearch(searchTerm: string) {
+
         this.router.navigate(
             [], 
             {
@@ -53,6 +59,13 @@ export class InvestorsComponent implements OnInit {
             });
 
         this.filteredInvestors = this.filterBy(this.investors, this.searchOption, searchTerm);
+    }
+
+    public onInvestorSelected(investor: IInvestor) {
+        if (!investor || !investor.hasOwnProperty('investorId')) {
+            throw new Error("Invalid investor selection.");
+        }
+        this.router.navigate(['./detail'], {relativeTo: this.activatedRoute, queryParams: {id: investor?.investorId}});
     }
 
     private getInvestors(): Observable<any[]> {

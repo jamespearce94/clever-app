@@ -1,0 +1,43 @@
+<div class="accounts-container">
+    <div class="title">{{investor?.name}}'s Accounts</div>
+
+    <table class="accounts-table" *ngIf="investorAccounts?.length > 0">
+        <th>ID</th>
+        <th>Account Type</th>
+        <th>Amount Held</th>
+        <th>Date Created</th>
+        <tr *ngFor="let row of investorAccounts">
+            <td>{{row?.accountId}}</td>
+            <td>{{row?.type}}</td>
+            <td>{{row?.amountHeld}}</td>
+            <td>{{row?.dateCreated | dateFormat:'dd/MM/yyyy'}}</td>
+        </tr>
+    </table>
+
+    <form [formGroup]="accountForm" (ngSubmit)="onAddNewAccount()">
+        <div class="input-row">
+            <div class="input-container">
+                <div class="label">Amount Held</div>
+                <input id="amountHeld" type="number" formControlName="amountHeld" placeholder="Amount held">
+                <!-- Component would be made if there was more than one error type. -->
+                <div #required class="error">
+                    <a *ngIf="amountHeld.invalid && (amountHeld.dirty || amountHeld.touched) && amountHeld?.errors?.required">Amount Held Required</a>
+                </div> 
+            </div>
+    
+            <div class="input-container">
+                <div class="label">Account Type</div>
+                <select id="type" formControlName="type" placeholder="Account type">
+                    <option *ngFor="let option of accountTypeOptions" [value]="option?.value">{{option?.viewValue}}</option>
+                </select>
+                <div #required class="error">
+                    <a *ngIf="accountType.invalid && (accountType.dirty || accountType.touched) && accountType?.errors?.required">Account Type Required</a>
+                </div> 
+            </div>
+        </div>
+
+        <sh-button type="submit" [disabled]="!accountForm?.valid">Create new account</sh-button>
+    </form>
+
+</div>
+

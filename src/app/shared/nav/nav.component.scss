@@ -9,7 +9,7 @@ $nav-height: 70px;
     background: $dark-grey;
     height: $nav-height;
     padding: 0 $sp_xl;
-    width: 100%;
+    width: calc(100% - 64px);
     position: relative;
 }
 

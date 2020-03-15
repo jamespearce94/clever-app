@@ -1,18 +1,24 @@
 @import "../styles/colours.scss";
 
-@mixin page-header() {
-    font-size: 28px;
+@mixin page-header($font-size: 28px) {
+    font-size: $font-size;
     font-weight: 400;
 }
 
-@mixin table-header() {
-    font-size: 10px;
+@mixin table-header($font-size: 10px) {
+    font-size: $font-size;
     color: $grey;
     text-align: left;
 }
 
-@mixin table-row() {
-    font-size: 12px;
+@mixin table-row($font-size: 12px) {
+    font-size: $font-size;
     color: $dark-grey;
     text-align: left;
+}
+
+@mixin labels-additional-info($font-size: 12px) {
+    font-size: $font-size;
+    font-weight: 400;
+    color: $grey;
 }

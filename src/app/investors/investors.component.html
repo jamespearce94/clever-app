@@ -7,7 +7,7 @@
         <th>Name</th>
         <th>Surname</th>
         <th>Date</th>
-        <tr *ngFor="let row of filteredInvestors">
+        <tr *ngFor="let row of filteredInvestors" (click)="onInvestorSelected(row)">
             <td>{{row?.name}}</td>
             <td>{{row?.surname}}</td>
             <td>{{row?.dateCreated | dateFormat:'dd/MM/yyyy'}}</td>
