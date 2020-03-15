@@ -2,13 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Route} from '@angular/router';
 
-
-
-
 export interface INavRoute extends Route {
   label?: string;
 }
-
 
 const routes: INavRoute[] = [
   {
@@ -18,8 +14,6 @@ const routes: INavRoute[] = [
   },
   { path: '',   redirectTo: '/investors', pathMatch: 'full' },
 ]
-
-
 
 @NgModule({
   declarations: [],

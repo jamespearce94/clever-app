@@ -10,8 +10,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         CommonModule,
         FontAwesomeModule
     ],
-    exports: [ButtonComponent],
-    declarations: [ButtonComponent],
+    exports: [
+        ButtonComponent
+    ],
+    declarations: [
+        ButtonComponent
+    ],
     providers: [],
 })
 export class ButtonModule { }

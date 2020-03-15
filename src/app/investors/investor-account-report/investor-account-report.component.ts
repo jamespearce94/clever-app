@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IInvestor, IAccount, IPieChartPoint } from 'src/app/core/core.interfaces';
 import { Subscription, throwError } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { InvestorsBackendService } from 'src/app/core/investors-backend.service';
 import { AccountsBackendService } from 'src/app/core/accounts-backend.service';
 import { map, flatMap } from 'rxjs/operators';
-import { isNumber, isObject, groupBy, reduce } from 'lodash-es';
+import { isNumber, isObject, groupBy, reduce, sortBy } from 'lodash-es';
 
 @Component({
     selector: 'app-investor-account-report',
@@ -13,7 +13,7 @@ import { isNumber, isObject, groupBy, reduce } from 'lodash-es';
     styleUrls: ['./investor-account-report.component.scss']
 })
 
-export class InvestorAccountReportComponent implements OnInit {
+export class InvestorAccountReportComponent implements OnInit, OnDestroy {
 
     public investor: IInvestor;
     public investorAccounts: IAccount[];
@@ -52,11 +52,15 @@ export class InvestorAccountReportComponent implements OnInit {
                 throwError("Unable to retrieve investor.");
             })
         ).subscribe((accounts: IAccount[]) => {
-            this.investorAccounts = accounts;
+            this.investorAccounts = sortBy(accounts, 'type');
             this.setChartData();
         },
         (e) => console.error(e)));
 
+    }
+
+    public ngOnDestroy() {
+        this.accountsSubscription.unsubscribe();
     }
 
     private setChartData() {

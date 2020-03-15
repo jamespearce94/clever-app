@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { map, flatMap } from 'rxjs/operators';
 import { of, throwError, Subscription } from 'rxjs';
-import { isNumber, isObject } from 'lodash-es'; 
+import { isNumber, isObject, sortBy } from 'lodash-es'; 
 import { InvestorsBackendService } from 'src/app/core/investors-backend.service';
 import { IInvestor, IAccount, IOption, AccountType } from 'src/app/core/core.interfaces';
 import { AccountsBackendService } from 'src/app/core/accounts-backend.service';
@@ -14,7 +14,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
     styleUrls: ['./investor-details.component.scss']
 })
 
-export class InvestorDetailsComponent implements OnInit {
+export class InvestorDetailsComponent implements OnInit, OnDestroy {
 
     public investor: IInvestor;
     public investorAccounts: IAccount[];
@@ -62,10 +62,14 @@ export class InvestorDetailsComponent implements OnInit {
             })
         ).subscribe((accounts: IAccount[]) => {
             this.setAccountTypeOptions();
-            this.investorAccounts = accounts;
+            this.investorAccounts = sortBy(accounts, 'dateCreated').reverse();
         },
         (e) => console.error(e)));
 
+    }
+
+    public ngOnDestroy() {
+        this.accountsSubscription.unsubscribe();
     }
 
     public onAddNewAccount() {
@@ -78,7 +82,7 @@ export class InvestorDetailsComponent implements OnInit {
         this.accountsSubscription.add(
             this.accountsService.createNewAccount(accountDTO).subscribe((account) => {
                 if (this.investorAccounts?.length > 0) {
-                    this.investorAccounts.push(account);
+                    this.investorAccounts = sortBy([...this.investorAccounts, account], 'dateCreated').reverse();
                 } else {
                     this.investorAccounts = [account];
                 }

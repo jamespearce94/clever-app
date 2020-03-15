@@ -1,4 +1,33 @@
+@import "../../styles/fonts.scss";
+@import "../../styles/spacing.scss";
+@import "../../styles/media-queries.scss";
+
+.report-container {
+    padding: $sp_lg;
+}
+
 .chart-container {
-    width: 100%;
+    width: 50%;
     height: 250px;
+    @include max-lg {
+        width: calc(100% - 24px);
+    }
+}
+
+.title {
+    @include page-header;
+    padding-bottom: $sp_md;
+}
+
+.card {
+    padding: $sp_md;
+    border-radius: 6px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    position: relative;
+    .card-title {
+        position: absolute;
+        top: $sp_md;
+        left: $sp_md;
+        @include category-title;
+    }
 }

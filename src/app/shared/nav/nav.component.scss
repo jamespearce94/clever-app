@@ -1,16 +1,20 @@
 @import '../../styles/spacing.scss';
 @import '../../styles/colours.scss';
 @import '../../styles/postioning.scss';
+@import '../../styles/fonts.scss';
 
 $nav-height: 70px;
 
 
 .nav-container {
-    background: $dark-grey;
+    background: rgba($dark-grey, .1);
+    border-top: 4px solid $clever-purple;
+    box-shadow: 0 6px 4px -4px $light-grey;
     height: $nav-height;
     padding: 0 $sp_xl;
     width: calc(100% - 64px);
     position: relative;
+    @include flex-row(center);
 }
 
 .nav-links {
@@ -19,11 +23,20 @@ $nav-height: 70px;
 }
 
 .nav-link {
-    color: $white;
+    @include labels-additional-info(14px);
+    color: $clever-purple;
+    font-weight: bold;
     padding: $sp_xs $sp_md;
-    border-left: 1px solid $white;
-    border-right: 1px solid $white;
+    // border-left: 1px solid $white;
+    // border-right: 1px solid $white;
+    &:hover {
+        color: rgba($clever-purple, .7);
+    }
     &.active {
         text-decoration: underline;
     }
+}
+
+img {
+    padding-right: $sp_md;
 }

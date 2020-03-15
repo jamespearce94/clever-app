@@ -4,6 +4,7 @@ import { InvestorsBackendService } from '../core/investors-backend.service';
 import { IInvestor } from '../core/core.interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, take, flatMap } from "rxjs/operators";
+import { sortBy } from 'lodash-es'; 
 
 @Component({
     selector: 'app-investors',
@@ -27,7 +28,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
     ) { }
 
     public ngOnInit() {
-        this.investorsSubscription.add(this.activatedRoute.queryParams.pipe(
+        this.investorsSubscription.add(this.activatedRoute?.queryParams?.pipe(
             map((params) => {
                 if (params && params.hasOwnProperty("searchTerm")) {
                     this.searchTerm = params["searchTerm"];
@@ -38,7 +39,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
             }),
             take(1)
         ).subscribe((investors: IInvestor[]) => {
-            this.investors = investors;
+            this.investors = sortBy(investors, 'surname', 'name');
             this.filteredInvestors = this.filterBy(this.investors, this.searchOption, this.searchTerm);
         }));
     }
@@ -48,14 +49,15 @@ export class InvestorsComponent implements OnInit, OnDestroy {
     }
 
     public onSearch(searchTerm: string) {
-
-        this.router.navigate(
-            [], 
-            {
-              relativeTo: this.activatedRoute,
-              queryParams: {searchTerm: searchTerm}, 
-              queryParamsHandling: 'merge',
-            });
+        if (this.router.hasOwnProperty('navigate')) {
+            this.router.navigate(
+                [], 
+                {
+                  relativeTo: this.activatedRoute,
+                  queryParams: {searchTerm: searchTerm}, 
+                  queryParamsHandling: 'merge',
+                });
+        }
 
         this.filteredInvestors = this.filterBy(this.investors, this.searchOption, searchTerm);
     }
@@ -82,7 +84,7 @@ export class InvestorsComponent implements OnInit, OnDestroy {
 
     private filterBy(investors: IInvestor[], key: string, searchTerm: string): IInvestor[] {
         return investors.filter((x) => {
-            return x[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+            return x[key] && x[key].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
         });
     }
 }

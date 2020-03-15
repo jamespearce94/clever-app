@@ -14,10 +14,8 @@ export class NavComponent implements OnInit {
 
     constructor(private readonly router: Router) { }
 
-    ngOnInit() {
-
+    public ngOnInit() {
         const links = this.router.config.filter((x) => x.path?.length > 0 && x.path !== '**');
         this.routes = links as INavRoute;
-        console.log(this.routes);
      }
 }

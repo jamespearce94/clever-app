@@ -4,17 +4,17 @@
 
 :host {
     button {
-        @include labels-additional-info(14px);
+        @include labels-additional-info(12px);
         border: none;
         padding: $sp-xs $sp_sm;
         cursor: pointer;
 
         &.primary {
-            background: $blue;
+            background: $clever-purple;
             color: $white;
             border-radius: 2px;
             &:hover {
-                background: rgba($blue, .7);
+                background: rgba($clever-purple, .7);
             }
         }
         
@@ -23,7 +23,7 @@
             background: transparent;
             color: $blue;
             border-radius: 2px;
-            border: 1px solid $blue;
+            border: 1px solid $clever-purple;
             &:hover {
                 background: transparent;
             }
@@ -40,6 +40,9 @@
         }
         .label-padding {
             padding-left: $sp_sm;
+        }
+        fa-icon {
+            font-size: 14px;
         }
     }
 }

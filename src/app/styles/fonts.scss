@@ -3,6 +3,13 @@
 @mixin page-header($font-size: 28px) {
     font-size: $font-size;
     font-weight: 400;
+    color: $dark-grey;
+}
+
+@mixin category-title {
+    font-size: 20px;
+    font-weight: 400;
+    color: $dark-grey;
 }
 
 @mixin table-header($font-size: 10px) {

@@ -6,7 +6,6 @@
         <input name="investor-search" placeholder="Search Investors" [(ngModel)]="searchTerm" [value]="searchTerm" (ngModelChange)="onSearch($event)">
     </div>
    
-
     <table class="investors-table" *ngIf="filteredInvestors?.length > 0">
         <th>Name</th>
         <th>Surname</th>
@@ -22,5 +21,6 @@
             </td>
         </tr>
     </table>
+
 </div>
 

@@ -1,0 +1,36 @@
+@import "../../styles.scss";
+
+$xs: 0;
+$sm: map-get($grid-breakpoints, sm);
+$md: map-get($grid-breakpoints, md); 
+$lg: map-get($grid-breakpoints, lg); 
+$xl: map-get($grid-breakpoints, xl); 
+
+@mixin max-xl {
+    @media (max-width: calc(#{$xl} - 1px)) {
+        @content;
+      }
+}
+
+@mixin max-lg {
+    @media (max-width: calc(#{$lg} - 1px)) {
+        @content;
+      }
+}
+
+@mixin max-md {
+    @media (max-width: calc(#{$md} - 1px)) {
+        @content;
+    }
+}
+@mixin max-sm {
+    @media (max-width: calc(#{$sm} - 1px)) {
+        @content;
+    }
+}
+
+@mixin max-xs {
+    @media (max-width: calc(#{$xs} - 1px)) {
+        @content;
+    }
+}

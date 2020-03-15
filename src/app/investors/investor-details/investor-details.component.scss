@@ -41,5 +41,22 @@
     }
 }
 
-sh-button {
+input, select {
+    border-radius: 3px;
+    margin: 0;
+    padding: $sp_xs;
+    border: 1px solid $light-grey;
+    @include labels-additional-info;
+    color: $dark-grey;
+    &:hover {
+        border-color: $blue;
+    }
+    &:focus {
+        outline: none;
+        border-color: $blue;
+    }
+}
+
+select {
+    padding: 3px $sp_xs;
 }

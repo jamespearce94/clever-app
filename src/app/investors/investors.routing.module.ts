@@ -10,7 +10,6 @@ const routes = [
     {path: 'report', component: InvestorAccountReportComponent}
 ]
 
-
 @NgModule({
     imports: [
         RouterModule.forChild(routes)

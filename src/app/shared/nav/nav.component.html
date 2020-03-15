@@ -1,5 +1,6 @@
 <div class="nav-container">
+    <img src="../../../assets/Clever_logo-1-sm2.png">
     <div class="nav-links">
-        <a class="nav-link" *ngFor="let link of routes" routerLink="'/' + link?.path" routerLinkActive="active" >{{link?.label}}</a>
+        <a class="nav-link" *ngFor="let link of routes" [routerLink]="'/' + link?.path" routerLinkActive="active" >{{link?.label}}</a>
     </div>
 </div>

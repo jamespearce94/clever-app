@@ -1,9 +1,11 @@
-Account Report
-
-
-<div class="chart-container">
-  <ngx-charts-advanced-pie-chart *ngIf="pieChartData?.length"
-  [results]="pieChartData"
-  >
-</ngx-charts-advanced-pie-chart>
+<div class="report-container">
+    <div class="title">{{investor?.name}}'s Accounts Summary</div>
+    <div class="chart-container card">
+        <div class="card-title">Total by investment type</div>
+        <ngx-charts-advanced-pie-chart *ngIf="pieChartData?.length"
+        [results]="pieChartData"
+        >
+      </ngx-charts-advanced-pie-chart>
+      </div>
 </div>
+
